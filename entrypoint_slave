@@ -1,0 +1,16 @@
+#!/bin/sh -x
+
+if [ -n "$DOCKER_GROUP_ON_HOST" ]; then
+
+    # create a new group with the same id as the docker group on the original
+    # host
+    addgroup --gid $DOCKER_GROUP_ON_HOST docker_from_host
+
+    # add user jenkins, that will run the slave, to that new group so user
+    # jenkins can launch docker containers using the docker daemon on the
+    # original host
+    usermod -G docker_from_host -a jenkins
+fi
+
+# finally call the same entrypoint as the original base image
+/usr/local/bin/setup-sshd "$@"
