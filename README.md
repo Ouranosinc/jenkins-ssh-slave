@@ -13,5 +13,5 @@ docker run
   -e "JENKINS_SLAVE_SSH_PUBKEY=`cat your_id_rsa.pub`" \
   -e "DOCKER_GROUP_ON_HOST=`getent group |grep docker | awk -F: '{print $3}'`" \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  tlvu/jenkins-ssh-slave
+  pavics/jenkins-ssh-slave
 ```
